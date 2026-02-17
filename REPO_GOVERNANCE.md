@@ -1,46 +1,67 @@
 # Korzent — Repository Governance
 
-VERSION: v1.0
+VERSION: v1.0  
 SCOPE: Korzent Execution Governance Standard only.
+
+---
 
 ## Purpose
 
-This repository defines a deterministic execution governance standard.
-It is NOT a runtime, SaaS, gateway, orchestration engine, or policy marketplace.
+This repository defines the Korzent Execution Governance Standard.
 
-## Invariants (Korzent-Specific)
+It specifies deterministic, cryptographically verifiable receipt behavior.  
+It does **not** define runtime systems, orchestration engines, SaaS services, operator authentication, or policy marketplaces.
 
-1) No protocol drift without SemVer change
-- Any change to receipt.schema.json, hashing rules, canonicalization rules, signature encoding, receipt kinds, or verification behavior requires a version bump.
-- Any schema change requires updating the locked schema hash where applicable.
+---
 
-2) Strict verification only
-- No compatibility mode in v1.
-- No lenient parsing paths.
-- additionalProperties: false remains enforced.
+## Invariants
 
-3) Deterministic reproducibility
-- Protocol-affecting changes MUST include deterministic test vectors and tests proving verification outcomes.
+### 1. Protocol Stability and Versioning
 
-4) Demo keys are demo-only
-- No production signing keys are ever committed.
-- Any keys in examples are explicitly demo-only.
+- Any change to `receipt.schema.json`, canonicalization rules, hashing rules, signature encoding, receipt kinds, or verification behavior constitutes a protocol change.
+- Protocol changes require a semantic version bump.
+- Schema changes require updating the locked `schema_hash` constant.
+- Verification outcomes must remain deterministic for a given protocol version.
 
-## Scope Restrictions
+### 2. Strict Verification
 
-Out of scope:
-- Operator auth logic
-- SaaS configuration
-- Key registry services
-- Orchestration logic
-- Replay engines
-- Marketplace features
+- Korzent v1 enforces strict validation.
+- Compatibility modes or lenient parsing paths are not permitted.
+- `additionalProperties: false` remains enforced across receipt variants.
 
-Those belong in higher-layer repos.
+### 3. Deterministic Reproducibility
 
-## Stop Conditions
+- Protocol-affecting changes must include deterministic test vectors.
+- Tests must prove verification behavior for all receipt kinds.
+- Independent implementations must be able to reproduce identical verification outcomes.
 
-STOP if:
-- Any change alters verifier accept/reject behavior without SemVer bump.
-- Any change modifies receipt.schema.json without version bump.
-- Canonicalization behavior changes without explicit version bump and updated proofs.
+### 4. Demo Material
+
+- Any signing keys included in the repository are for demonstration purposes only.
+- No production signing keys may be committed.
+
+---
+
+## Scope Boundaries
+
+The following concerns are explicitly out of scope for this repository:
+
+- Operator authentication logic  
+- Runtime authorization enforcement  
+- SaaS configuration  
+- Key registry services  
+- Orchestration engines  
+- Replay engines  
+- Marketplace or economic features  
+
+These belong in higher-layer implementations.
+
+---
+
+## Change Discipline
+
+Pull requests that modify protocol-defining files must:
+
+- Clearly state whether the change is protocol-breaking or non-breaking.
+- Update version identifiers where required.
+- Preserve deterministic verification behavior within the same protocol version.
