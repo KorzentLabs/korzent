@@ -4,8 +4,16 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "test": "../services/action-gateway/node_modules/.bin/vitest run",
-    "typecheck": "../services/action-gateway/node_modules/.bin/tsc -p tsconfig.json --noEmit",
-    "verify": "../services/action-gateway/node_modules/.bin/tsx cli/korzent.ts verify"
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify": "tsx cli/korzent.ts verify"
+  },
+  "devDependencies": {
+    "@noble/ed25519": "^2.3.0",
+    "@types/node": "^22.10.2",
+    "ajv": "^8.17.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.4"
   }
 }

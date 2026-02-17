@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
-import { describe, expect, it } from '../../services/action-gateway/node_modules/vitest/dist/index.js';
-import * as ed from '../../services/action-gateway/node_modules/@noble/ed25519/index.js';
-import Ajv2020 from '../../services/action-gateway/node_modules/ajv/dist/2020.js';
+import { describe, expect, it } from 'vitest';
+import * as ed from '@noble/ed25519';
+import Ajv2020 from 'ajv/dist/2020.js';
 import { canonicalizeJsonToBytes } from '../src/canonical.js';
 import { sha256Ref } from '../src/hash.js';
 import { KORZENT_V1_RECEIPT_SCHEMA, KORZENT_V1_SCHEMA_HASH } from '../src/schema.js';

@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { createRequire } from 'node:module';
+import * as ed from '@noble/ed25519';
 import { canonicalizeJsonToBytes } from './canonical.js';
 import { deriveReceiptId } from './sign.js';
 import { KORZENT_V1_SCHEMA_HASH } from './schema.js';
@@ -14,13 +14,6 @@ import {
 
 const HASH_REF_RE = /^sha256:[0-9a-f]{64}$/;
 const TIMESTAMP_UTC_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
-
-const require = createRequire(import.meta.url);
-
-const ed = require('../../services/action-gateway/node_modules/@noble/ed25519/index.js') as {
-  etc: { sha512Sync: (...messages: Uint8Array[]) => Uint8Array };
-  verify: (signature: Uint8Array, message: Uint8Array, publicKey: Uint8Array) => boolean;
-};
 
 ed.etc.sha512Sync = (...messages: Uint8Array[]): Uint8Array => {
   const hash = createHash('sha512');

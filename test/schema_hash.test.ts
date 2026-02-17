@@ -1,4 +1,4 @@
-import { describe, expect, it } from '../../services/action-gateway/node_modules/vitest/dist/index.js';
+import { describe, expect, it } from 'vitest';
 import { computeSchemaHashFromEmbeddedSchema, KORZENT_V1_SCHEMA_HASH } from '../src/schema.js';
 
 describe('KORZENT_V1_SCHEMA_HASH', () => {

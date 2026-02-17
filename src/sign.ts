@@ -1,16 +1,8 @@
 import { createHash } from 'node:crypto';
-import { createRequire } from 'node:module';
+import * as ed from '@noble/ed25519';
 import { canonicalizeJsonToBytes } from './canonical.js';
 import { sha256Ref } from './hash.js';
 import type { UnsignedReceiptV1 } from './types.js';
-
-const require = createRequire(import.meta.url);
-
-const ed = require('../../services/action-gateway/node_modules/@noble/ed25519/index.js') as {
-  etc: { sha512Sync: (...messages: Uint8Array[]) => Uint8Array };
-  getPublicKey: (privateKey: Uint8Array) => Uint8Array;
-  sign: (message: Uint8Array, privateKey: Uint8Array) => Uint8Array;
-};
 
 ed.etc.sha512Sync = (...messages: Uint8Array[]): Uint8Array => {
   const hash = createHash('sha512');
