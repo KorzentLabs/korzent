@@ -105,6 +105,14 @@ Any modification to `receipt.schema.json` requires:
 
 ---
 
+## Layering and Scope
+
+Korzent defines the execution governance invariant only.
+Evolution, ratcheting, epoch migration, and authority evolution
+are intentionally out of scope. See EVOLUTION.md.
+
+---
+
 ## Design Principles
 
 - Minimal surface area  
