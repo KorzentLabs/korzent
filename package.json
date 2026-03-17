@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "type": "module",
+  "bin": {
+    "korzent": "dist/cli/korzent.js"
+  },
   "scripts": {
+    "build": "tsc -p tsconfig.json --outDir dist",
+    "prepack": "npm run build",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "verify": "tsx cli/korzent.ts verify"
